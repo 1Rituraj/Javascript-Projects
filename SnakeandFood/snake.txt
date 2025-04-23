@@ -1,0 +1,90 @@
+Why we use requestAnimationFrame() in Snake Game
+✅ 1. Smooth Movement
+The snake needs to move smoothly across the screen. requestAnimationFrame() lets your code run right before the browser repaints the screen — typically 60 times per second (60 FPS).
+
+So instead of jerky or laggy movement, your snake glides nicely.
+
+✅ 2. Better Performance
+Unlike setInterval() which runs at a fixed time, requestAnimationFrame() only runs when the browser is ready to draw. This means:
+
+Less CPU usage
+
+No wasteful updates
+
+No unnecessary processing when the tab is inactive (it pauses automatically)
+
+requestAnimationFrame() passes a timestamp (called currentTime) that helps you calculate how much time has passed.
+
+You can use it to:
+
+Control the speed of the snake
+
+Decide when to move the snake or spawn food
+
+Avoid moving the snake too fast or too slow on different computers
+
+//Important Points must read
+
+requestAnimationFrame() REALLY doing?
+ It’s a built-in browser function for animations.
+
+✨ So what happens?
+When you call requestAnimationFrame(gameLoop), you're telling the browser:
+
+“Hey, I want to run this gameLoop function just before you repaint the screen.”
+
+The browser:
+
+Waits until it's ready to draw the next frame.
+
+Then it calls your gameLoop(time) function.
+
+The time argument is a high-precision timestamp (in ms).
+
+
+
+🎮 Snake movement:
+The snake needs to move one step every few milliseconds based on speed. But:
+
+What if the user’s computer is fast? setInterval() will run like crazy.
+
+What if it’s slow? The snake lags or jumps.
+
+What if the user switches tabs? Your game loop still runs (wasting battery).
+
+✅ Solution: requestAnimationFrame()
+It gives you:
+
+Consistent updates synced to the monitor’s refresh rate.
+
+A timestamp, so you know exactly how much time passed.
+
+Automatic pause/resume if the tab isn’t visible (nice for battery/performance).
+
+
+🧠 What's happening:
+currentTime is passed automatically by requestAnimationFrame()
+
+You use it to calculate how long since the last snake move
+
+If enough time has passed (based on speed), you:
+
+Move the snake
+
+Check if it ate food
+
+Redraw everything
+
+Then schedule the next frame
+
+🎯 Final Summary:
+requestAnimationFrame() = best for smooth, timed animations like games.
+
+It runs exactly when the screen is ready to repaint.
+
+It pauses when tab is inactive (saves CPU/battery).
+
+It gives a timestamp, so you can control your game speed precisely.
+
+In Snake, you use it to control how fast the snake moves, when to draw, and keep gameplay smooth.
+
